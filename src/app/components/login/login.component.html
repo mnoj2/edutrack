@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="login">
+
+    <main class="login__hero">
+        <div class="login__title">Welcome to EduTrack</div>
+        <div class="login__subtitle">Manage students, Simplify administration.</div>
+    </main>
+
+    <aside class="login__card">
+        <h2 class="login__title">Login</h2>
+        <form class="login__form">
+            <div class="login__field mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" formControlName="username" aria-describedby="usernameHelp">
+                <div id="usernameHelp" class="text-danger form-text">
+                    <i class='bx bxs-error-circle'></i> <span>Enter valid username</span>
+                </div>
+            </div>
+            <div class="login__field mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password" aria-describedby="passwordHelp">
+                <div id="passwordHelp" class="text-danger form-text">
+                    <i class='bx bxs-error-circle'></i> <span>Enter valid password</span>
+                </div>
+            </div>
+            <button type="submit" class="btn login__btn">LOGIN</button>
+        </form>
+    </aside>
+
+</div>
