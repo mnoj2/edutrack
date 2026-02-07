@@ -8,6 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StudentRegComponent } from './components/student-reg/student-reg.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
+import { provideHotToastConfig } from '@ngneat/hot-toast';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,41 @@ import { StudentListComponent } from './components/student-list/student-list.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ 
+    provideHotToastConfig({
+    success: {
+        iconTheme: {
+          primary: '#9ACD3A',   
+          secondary: '#0F120D',  
+        },
+        style: {
+          border: '3px solid #0F120D',
+          borderRadius: '0px',
+          background: 'white',
+          color: '#0F120D',
+          fontWeight: 'bold',
+        },
+      },
+      error: {
+        iconTheme: {
+          primary: '#FF4C4C',    
+          secondary: '#0F120D',  
+        },
+        style: {
+          border: '3px solid #0F120D', 
+          borderRadius: '0px',
+          background: 'white',
+          color: '#0F120D',
+          fontWeight: 'bold',
+        },
+      },
+      })
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

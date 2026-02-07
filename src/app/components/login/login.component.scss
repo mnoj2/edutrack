@@ -102,5 +102,14 @@ $color-light-gray:     #F8F9FA;
       transform: translate(0, 0);
       box-shadow: none;
     }
+
+    &:disabled {
+      background-color: lighten($color-accent-lime, 20%);
+      border-color: lighten($color-primary-dark, 20%);
+      color: lighten($color-primary-dark, 20%);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
   }
 }
