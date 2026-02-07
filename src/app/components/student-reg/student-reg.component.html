@@ -1,6 +1,82 @@
 <div class="container">
     <app-navbar></app-navbar>
-    <div class="wrapper">
-        <p>student-reg works!</p>
+    <div class="register">
+        <div class="register__card">
+            <h2 class="register__title">REGISTER NEW STUDENT</h2>
+
+            <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="register__form">
+                <div class="register__grid">
+                    
+                    <div class="register__field">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" formControlName="fullName">
+                        <div class="form-text text-danger" *ngIf="studentForm.get('fullName')?.invalid && studentForm.get('fullName')?.touched">
+                            <i class='bx bxs-error-circle'></i> Full name is required
+                        </div>
+                    </div>
+
+                    <div class="register__field">
+                        <label>Email</label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <div class="form-text text-danger" *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched">
+                            <i class='bx bxs-error-circle'></i> Enter a valid email address
+                        </div>
+                    </div>
+
+                    <div class="register__field">
+                        <label>Mobile Number</label>
+                        <input type="number" class="form-control" formControlName="mobileNumber" [maxlength]="10">
+                        <div class="form-text text-danger" *ngIf="studentForm.get('mobileNumber')?.invalid && studentForm.get('mobileNumber')?.touched">
+                            <i class='bx bxs-error-circle'></i> 10-digit number required
+                        </div>
+                    </div>
+
+                    <div class="register__field">
+                        <label>Gender</label>
+                        <select class="form-control" formControlName="gender">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div class="form-text text-danger" *ngIf="studentForm.get('gender')?.invalid && studentForm.get('gender')?.touched">
+                            <i class='bx bxs-error-circle'></i> Please select a gender
+                        </div>
+                    </div>
+
+                    <div class="register__field">
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control" formControlName="dateOfBirth">
+                        <div class="form-text text-danger" *ngIf="studentForm.get('dateOfBirth')?.invalid && studentForm.get('dateOfBirth')?.touched">
+                            <i class='bx bxs-error-circle'></i> Date of birth is required
+                        </div>
+                    </div>
+
+                    <div class="register__field">
+                        <label>Course</label>
+                        <input type="text" class="form-control" formControlName="course">
+                        <div class="form-text text-danger" *ngIf="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
+                            <i class='bx bxs-error-circle'></i> Course name is required
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="register__footer">
+                    <div class="register__checkbox">
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="checkbox" id="terms" formControlName="termsAccepted" value="">
+                            <label for="terms">Accept Terms and Conditions</label>
+                        </div>
+                        <div class="form-text text-danger" *ngIf="studentForm.get('termsAccepted')?.invalid && studentForm.get('termsAccepted')?.touched">
+                            <i class='bx bxs-error-circle'></i> Required
+                        </div>
+                    </div>
+
+                    <button type="submit" class="register__btn" [disabled]="studentForm.invalid">
+                        SUBMIT
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ export interface Student {
   fullName: string;
   email: string;
   mobileNumber: string;
-  dateOfBirth: string; // "YYYY-MM-DD" for Bootstrap Date picker
+  dateOfBirth: string;
   gender: 'Male' | 'Female' | 'Other';
   course: 'CSE' | 'IT' | 'ECE' | 'EEE' | 'MECH' | 'CIVIL';
   termsAccepted: boolean;

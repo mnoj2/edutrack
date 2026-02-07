@@ -1,10 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
+import { StudentService } from 'src/app/services/student.service';
+import { HotToastService } from '@ngneat/hot-toast';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-student-reg',
   templateUrl: './student-reg.component.html',
   styleUrls: ['./student-reg.component.scss']
 })
-export class StudentRegComponent {
+export class StudentRegComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
+  private studentService = inject(StudentService);
+  private toast = inject(HotToastService);
 
+  studentForm = new FormGroup({
+    fullName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+    gender: new FormControl('', Validators.required),
+    dateOfBirth: new FormControl('', Validators.required),
+    course: new FormControl('', Validators.required),
+    termsAccepted: new FormControl(false, Validators.requiredTrue)
+  });
+
+  onSubmit() {
+    if (this.studentForm.valid) {
+      this.studentService.addStudent(this.studentForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.toast.success('Student Registered Successfully!');
+            this.studentForm.reset({ gender: '', termsAccepted: false });
+          },
+          error: () => this.toast.error('Registration Failed')
+        });
+    } else {
+      this.studentForm.markAllAsTouched();
+    }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -12,6 +12,8 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AgGridModule } from 'ag-grid-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule
   ],
   providers: [ 
     provideHotToastConfig({

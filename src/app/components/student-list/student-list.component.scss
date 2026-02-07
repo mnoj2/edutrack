@@ -1,0 +1,202 @@
+@use 'variables' as vars;
+
+.student-list-page {
+    background-color: vars.$color-white;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    border: vars.$border-neo-thick;
+    margin-top: 1rem;
+}
+
+
+::ng-deep .ag-theme-alpine {
+    --ag-font-family: 'Poppins', sans-serif;
+    --ag-font-size: 14px;
+
+    .ag-header-cell-label {
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .ag-cell {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+::ng-deep .btn-action {
+    border: vars.$border-neo-thin;
+    background: vars.$color-white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: vars.$transition-bounce;
+    font-size: 18px;
+    position: relative;
+    box-shadow: vars.$shadow-neo-tiny;
+
+    &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: vars.$shadow-neo-sm;
+    }
+
+    &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+    }
+}
+
+::ng-deep .btn-view {
+    color: vars.$color-black;
+
+    &:hover {
+        background-color: #9ACD32;
+    }
+}
+
+::ng-deep .btn-delete {
+    color: vars.$color-black;
+
+    &:hover {
+        background-color: vars.$color-black;
+        color: vars.$color-lime;
+    }
+}
+
+
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.custom-modal {
+    background: vars.$color-white;
+    border: vars.$border-neo-thick;
+    padding: 30px;
+    position: relative;
+    width: 500px;
+    z-index: 1001;
+    box-shadow: vars.$shadow-neo-lg;
+}
+
+.modal-header-neo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    h3 {
+        font-size: 24px;
+        font-weight: 800;
+    }
+}
+
+.close-btn-neo {
+    background: vars.$color-lime;
+    border: vars.$border-neo-thin;
+    width: 35px;
+    height: 35px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: vars.$shadow-neo-tiny;
+    }
+
+    &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+    }
+}
+
+.info-group {
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+
+    .label {
+        font-weight: 700;
+        min-width: 130px;
+    }
+
+    .value {
+        font-weight: 500;
+    }
+
+    .value.highlight {
+        color: vars.$color-lime;
+    }
+}
+
+.btn-neo-delete {
+    background: vars.$color-black;
+    color: vars.$color-lime;
+    border: vars.$border-neo-thin;
+    padding: 10px 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: vars.$transition-default;
+    box-shadow: vars.$shadow-neo-sm;
+
+    &:hover {
+        background: #333;
+        transform: translate(-2px, -2px);
+        box-shadow: vars.$shadow-neo-md;
+    }
+
+    &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+    }
+}
+
+.btn-neo-secondary {
+    background: vars.$color-white;
+    color: vars.$color-black;
+    border: vars.$border-neo-thin;
+    padding: 10px 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: vars.$transition-default;
+    box-shadow: vars.$shadow-neo-sm;
+
+    &:hover {
+        background: vars.$color-gray-light;
+        transform: translate(-2px, -2px);
+        box-shadow: vars.$shadow-neo-md;
+    }
+
+    &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+    }
+}
+
+.delete-modal {
+    box-shadow: vars.$shadow-neo-lg;
+}

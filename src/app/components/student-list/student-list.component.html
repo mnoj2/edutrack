@@ -1,7 +1,78 @@
-
-<div class="container">
+<div class="container min-vh-100 student-list-page">
     <app-navbar></app-navbar>
-    <div class="wrapper">
-        <p>student-list works!</p>
+
+    <div class="wrapper px-4">
+        <div class="header d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold">STUDENT LIST</h2>
+        </div>
+
+        <div class="grid-container">
+            <ag-grid-angular style="width: 100%;" class="ag-theme-alpine" [rowData]="rowData" [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef" [pagination]="true" [paginationPageSize]="10"
+                [paginationPageSizeSelector]="false" [domLayout]="'autoHeight'">
+            </ag-grid-angular>
+        </div>
+    </div>
+
+    <div class="custom-modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+        <div class="custom-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header-neo">
+                <h3 class="fw-bold m-0">Student Profile</h3>
+                <button class="close-btn-neo" (click)="closeModal()">X</button>
+            </div>
+
+            <div class="modal-body-neo" *ngIf="selectedStudent">
+                <div class="info-group">
+                    <span class="label">Full Name :</span>
+                    <span class="value highlight">{{ selectedStudent.fullName }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Email :</span>
+                    <span class="value">{{ selectedStudent.email }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Gender :</span>
+                    <span class="value">{{ selectedStudent.gender }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Mobile Number :</span>
+                    <span class="value">{{ selectedStudent.mobileNumber }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Course :</span>
+                    <span class="value">{{ selectedStudent.course }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Date of Birth :</span>
+                    <span class="value">{{ selectedStudent.dateOfBirth }}</span>
+                </div>
+
+                <div class="modal-footer-neo mt-4 d-flex justify-content-end">
+                    <button class="btn-neo-delete"
+                        (click)="onDeleteStudent(selectedStudent.email); closeModal()">Delete</button>
+                </div>
+            </div>
+            <div class="modal-shadow"></div>
+        </div>
+    </div>
+
+
+    <div class="custom-modal-overlay" *ngIf="isDeleteModalOpen" (click)="closeDeleteModal()">
+        <div class="custom-modal delete-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header-neo">
+                <h3 class="fw-bold m-0">Confirm Delete</h3>
+                <button class="close-btn-neo" (click)="closeDeleteModal()">X</button>
+            </div>
+
+            <div class="modal-body-neo text-center py-4">
+                <p class="fs-5 fw-bold mb-4">Are you sure you want to delete this student record? This action cannot
+                    be undone.</p>
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button class="btn-neo-secondary" (click)="closeDeleteModal()">Cancel</button>
+                    <button class="btn-neo-delete" (click)="confirmDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

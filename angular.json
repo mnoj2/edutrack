@@ -37,6 +37,11 @@
               "src/styles.scss",
               "node_modules/@ngneat/hot-toast/src/styles/styles.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
