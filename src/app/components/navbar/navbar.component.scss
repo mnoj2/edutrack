@@ -1,0 +1,63 @@
+$color-primary-dark:   #0F120D;    
+$color-accent-lime:    #9ACD3A;    
+$color-light-gray:     #F8F9FA;
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.custom-link {
+  font-size: 19px;
+  font-weight: 500;
+  color: #666;
+  padding: 5px 0;
+  padding-bottom: 1px;
+  border-bottom: 3px solid transparent; 
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+
+  &.active {
+    color: $color-primary-dark;
+    border-bottom: 3px solid $color-primary-dark; 
+  }
+}
+
+.navbar {
+
+  padding-bottom: 30px;
+  padding-top: 25px;
+
+    &__brand {
+        font-weight: 600;
+        font-size: 40px;
+        letter-spacing: -1px;
+        color: $color-primary-dark;
+    }
+
+
+    &__btn {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: $color-primary-dark;
+        color: $color-accent-lime;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 20px;
+        transition: all 0.2s ease;
+        border: none;
+
+        &:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 6px 6px 0px 0px $color-accent-lime;
+        }
+
+        &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+        color: $color-accent-lime;
+        }
+
+    }
+}

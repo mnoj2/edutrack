@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     NavbarComponent,
     StudentRegComponent,
-    StudentListComponent
+    StudentListComponent,
   ],
   imports: [
     BrowserModule,

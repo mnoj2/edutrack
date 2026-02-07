@@ -26,7 +26,7 @@ export class LoginComponent {
     password: new FormControl('')
   });
 
-  // ! Hardcode validation
+  
   ngOnInit(): void {
     console.log("Loaded");
   }
@@ -52,6 +52,8 @@ export class LoginComponent {
       this.passwordError = 'Password must be at least 8 chars';
       return;
     }
+
+    this.authService.changeUser(username);
 
     this.loginSubscription = this.authService.login(username!, password!).subscribe({
       next: (success) => {

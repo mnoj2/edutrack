@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="container">
+    <app-navbar></app-navbar>
+    <main class="home">
+        <div class="home__card d-flex">
+            <div class="home__title">Total Students</div>
+            <div class="home__value">{{ totalStudents }}</div>
+        </div>
+        <div class="home__chart">
+            <div #donutChartContainer></div>
+        </div>
+    </main>
+</div>

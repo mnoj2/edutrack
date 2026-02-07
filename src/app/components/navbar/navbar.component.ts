@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private toast = inject(HotToastService);
 
+  onLogout() {
+    this.authService.logout(); 
+    this.toast.success("Logged out successfully!");
+    this.router.navigate(['/login']);
+  }
 }
