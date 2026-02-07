@@ -19,6 +19,7 @@ export class LoginComponent {
 
   usernameError: string = '';
   passwordError: string = '';
+  showPassword = false;
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -34,14 +35,15 @@ export class LoginComponent {
     this.usernameError = '';
     this.passwordError = '';
 
-    const { username, password } = this.loginForm.value;
+    const username = this.loginForm.value.username?.trim();
+    const password = this.loginForm.value.password?.trim();
 
-    if (!username || username.trim().length === 0) {
+    if (!username || username.length === 0) {
       this.usernameError = 'Username is required';
       return;
     }
 
-    if (!password || password.trim().length === 0) {
+    if (!password || password.length === 0) {
       this.passwordError = 'Password is required';
       return;
     }
@@ -67,6 +69,10 @@ export class LoginComponent {
         this.toast.error('Error loading user data');
       }
     });
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   ngOnDestroy(): void {

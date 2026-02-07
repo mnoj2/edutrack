@@ -113,3 +113,27 @@ $color-light-gray:     #F8F9FA;
     }
   }
 }
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .eye-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: $color-primary-dark;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

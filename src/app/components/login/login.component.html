@@ -10,14 +10,33 @@
         <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="login__field mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" formControlName="username" aria-describedby="usernameHelp">
+                <input type="text" 
+                    class="form-control" 
+                    id="username" 
+                    formControlName="username" 
+                    aria-describedby="usernameHelp">
                 <div id="usernameHelp" *ngIf="usernameError" class="text-danger form-text">
                     <i class='bx bxs-error-circle'></i> <span>{{ usernameError }}</span>
                 </div>
             </div>
             <div class="login__field mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" formControlName="password" aria-describedby="passwordHelp">
+                
+                <div class="password-wrapper">
+                    <input 
+                        [type]="showPassword ? 'text' : 'password'" 
+                        class="form-control" 
+                        id="password" 
+                        formControlName="password">
+                    <button 
+                        type="button" 
+                        class="eye-btn" 
+                        (click)="togglePassword()"
+                        tabindex="-1">
+                        <i class='bx' [ngClass]="showPassword ? 'bx-hide' : 'bx-show'"></i>
+                    </button>
+                </div>
+
                 <div id="passwordHelp" *ngIf="passwordError" class="text-danger form-text">
                     <i class='bx bxs-error-circle'></i> <span>{{ passwordError }}</span>
                 </div>
