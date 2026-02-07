@@ -11,18 +11,18 @@
             <div class="login__field mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" formControlName="username" aria-describedby="usernameHelp">
-                <div id="usernameHelp" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger form-text">
-                    <i class='bx bxs-error-circle'></i> <span>Enter valid username</span>
+                <div id="usernameHelp" *ngIf="usernameError" class="text-danger form-text">
+                    <i class='bx bxs-error-circle'></i> <span>{{ usernameError }}</span>
                 </div>
             </div>
             <div class="login__field mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" formControlName="password" aria-describedby="passwordHelp">
-                <div id="passwordHelp" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger form-text">
-                    <i class='bx bxs-error-circle'></i> <span>Enter valid password</span>
+                <div id="passwordHelp" *ngIf="passwordError" class="text-danger form-text">
+                    <i class='bx bxs-error-circle'></i> <span>{{ passwordError }}</span>
                 </div>
             </div>
-            <button type="submit" [disabled]="loginForm.invalid" class="login__btn">LOGIN</button>
+            <button type="submit" class="login__btn">LOGIN</button>
         </form>
     </aside>
 

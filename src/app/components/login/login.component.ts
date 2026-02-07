@@ -16,12 +16,13 @@ export class LoginComponent {
   private toast = inject(HotToastService);
   private router = inject(Router);
   private loginSubscription?: Subscription;
-  errorMessage: string = '';
-  isSuccess: boolean = false;
+
+  usernameError: string = '';
+  passwordError: string = '';
 
   loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required ]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    username: new FormControl(''),
+    password: new FormControl('')
   });
 
   // ! Hardcode validation
@@ -30,7 +31,25 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.usernameError = '';
+    this.passwordError = '';
+
     const { username, password } = this.loginForm.value;
+
+    if (!username || username.trim().length === 0) {
+      this.usernameError = 'Username is required';
+      return;
+    }
+
+    if (!password || password.trim().length === 0) {
+      this.passwordError = 'Password is required';
+      return;
+    }
+    
+    if (password.length < 8) {
+      this.passwordError = 'Password must be at least 8 chars';
+      return;
+    }
 
     this.loginSubscription = this.authService.login(username!, password!).subscribe({
       next: (success) => {
