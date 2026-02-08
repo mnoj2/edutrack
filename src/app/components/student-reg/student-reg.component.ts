@@ -19,7 +19,7 @@ export class StudentRegComponent implements OnDestroy {
     email: new FormControl('', [Validators.required, Validators.email]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
     gender: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', Validators.required),
+    dateOfBirth: new FormControl('2005-01-01', Validators.required),
     course: new FormControl('', Validators.required),
     termsAccepted: new FormControl(false, Validators.requiredTrue)
   });
@@ -31,7 +31,7 @@ export class StudentRegComponent implements OnDestroy {
         .subscribe({
           next: () => {
             this.toast.success('Student Registered Successfully!');
-            this.studentForm.reset({ gender: '', termsAccepted: false });
+            this.studentForm.reset({ gender: '', termsAccepted: false, dateOfBirth: '2005-01-01' });
           },
           error: () => this.toast.error('Registration Failed')
         });
