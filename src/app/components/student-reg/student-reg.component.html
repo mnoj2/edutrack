@@ -53,9 +53,19 @@
 
                     <div class="register__field">
                         <label>Course</label>
-                        <input type="text" class="form-control" formControlName="course">
+                        <select class="form-control" formControlName="course">
+                            <option value="" disabled selected>Select Course</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ADS">ADS</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="CIVIL">CIVIL</option>
+                            <option value="MECH">MECH</option>
+                            <option value="BT">BT</option>
+                        </select>
                         <div class="form-text text-danger" *ngIf="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
-                            <i class='bx bxs-error-circle'></i> Course name is required
+                            <i class='bx bxs-error-circle'></i> Please select a course
                         </div>
                     </div>
 

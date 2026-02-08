@@ -5,9 +5,9 @@
     height: 75vh;
     color: vars.$color-black;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
-    gap: 130px;
+    gap: 60px;
 
     &__card {
         display: flex;
