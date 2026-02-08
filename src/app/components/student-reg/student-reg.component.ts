@@ -13,6 +13,7 @@ export class StudentRegComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
   private studentService = inject(StudentService);
   private toast = inject(HotToastService);
+  isSubmitting = false;
 
   studentForm = new FormGroup({
     fullName: new FormControl('', Validators.required),
@@ -25,17 +26,26 @@ export class StudentRegComponent implements OnDestroy {
   });
 
   onSubmit() {
-    if (this.studentForm.valid) {
+    if (this.studentForm.valid && !this.isSubmitting) {
+      this.isSubmitting = true;
       this.studentService.addStudent(this.studentForm.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
             this.toast.success('Student Registered Successfully!');
             this.studentForm.reset({ gender: '', termsAccepted: false, dateOfBirth: '2005-01-01' });
+            this.isSubmitting = false;
           },
-          error: () => this.toast.error('Registration Failed')
+          error: (err) => {
+            this.isSubmitting = false;
+            if (err.message === 'Email already exists') {
+              this.toast.error('Email already exists!');
+            } else {
+              this.toast.error('Registration Failed');
+            }
+          }
         });
-    } else {
+    } else if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
     }
   }

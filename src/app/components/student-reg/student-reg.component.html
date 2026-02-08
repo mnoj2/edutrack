@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="register__btn" [disabled]="studentForm.invalid">
+                    <button type="submit" class="register__btn" [disabled]="studentForm.invalid || isSubmitting">
                         SUBMIT
                     </button>
                 </div>

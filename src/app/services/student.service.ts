@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, switchMap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +15,34 @@ export class StudentService {
   }
 
   addStudent(student: any): Observable<any> {
-    const storedData = localStorage.getItem('students');
-    const students = storedData ? JSON.parse(storedData) : [];
+    const emailToAdd = student.email.trim().toLowerCase();
 
-    const deletedData = localStorage.getItem('deleted_emails');
-    let deletedEmails: string[] = deletedData ? JSON.parse(deletedData) : [];
-    deletedEmails = deletedEmails.filter(email => email !== student.email);
-    localStorage.setItem('deleted_emails', JSON.stringify(deletedEmails));
+    return this.getStudentsData().pipe(
+      switchMap(students => {
+        const emailExists = students.some(s => s.email.trim().toLowerCase() === emailToAdd);
+        if (emailExists) {
+          return throwError(() => new Error('Email already exists'));
+        }
 
-    students.push(student);
-    localStorage.setItem('students', JSON.stringify(students));
+        const storedData = localStorage.getItem('students');
+        const localStudents: any[] = storedData ? JSON.parse(storedData) : [];
 
-    return of(student);
+        // Final safe check against latest local storage state
+        if (localStudents.some(s => s.email.trim().toLowerCase() === emailToAdd)) {
+          return throwError(() => new Error('Email already exists'));
+        }
+
+        const deletedData = localStorage.getItem('deleted_emails');
+        let deletedEmails: string[] = deletedData ? JSON.parse(deletedData) : [];
+        deletedEmails = deletedEmails.filter(email => email.trim().toLowerCase() !== emailToAdd);
+        localStorage.setItem('deleted_emails', JSON.stringify(deletedEmails));
+
+        localStudents.push({ ...student, email: student.email.trim() });
+        localStorage.setItem('students', JSON.stringify(localStudents));
+
+        return of(student);
+      })
+    );
   }
 
   getStudentsData(): Observable<any[]> {
