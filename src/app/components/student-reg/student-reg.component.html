@@ -32,22 +32,27 @@
                     </div>
 
                     <div class="register__field">
-                        <label>Gender</label>
-                        <select class="form-control" formControlName="gender">
-                            <option value="" disabled selected>Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                        <div class="form-text text-danger" *ngIf="studentForm.get('gender')?.invalid && studentForm.get('gender')?.touched">
-                            <i class='bx bxs-error-circle'></i> Please select a gender
-                        </div>
-                    </div>
-
-                    <div class="register__field">
                         <label>Date of Birth</label>
                         <input type="date" class="form-control" formControlName="dateOfBirth">
                         <div class="form-text text-danger" *ngIf="studentForm.get('dateOfBirth')?.invalid && studentForm.get('dateOfBirth')?.touched">
                             <i class='bx bxs-error-circle'></i> Date of birth is required
+                        </div>
+                    </div>
+
+                    <div class="register__field register__field--radio">
+                        <label>Gender</label>
+                        <div class="register__radio-group">
+                            <div class="register__radio-item">
+                                <input type="radio" id="male" value="Male" formControlName="gender">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="register__radio-item">
+                                <input type="radio" id="female" value="Female" formControlName="gender">
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+                        <div class="form-text text-danger" *ngIf="studentForm.get('gender')?.invalid && studentForm.get('gender')?.touched">
+                            <i class='bx bxs-error-circle'></i> Please select a gender
                         </div>
                     </div>
 

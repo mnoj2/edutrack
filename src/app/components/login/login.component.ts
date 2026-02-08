@@ -26,11 +26,6 @@ export class LoginComponent {
     password: new FormControl('')
   });
 
-  
-  ngOnInit(): void {
-    console.log("Loaded");
-  }
-
   onSubmit() {
     this.usernameError = '';
     this.passwordError = '';

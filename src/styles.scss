@@ -15,9 +15,6 @@ body {
   user-select: none;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-}
 
 .form-control {
   color: vars.$color-black;
@@ -29,7 +26,7 @@ body {
   &:focus {
     background-color: vars.$color-white;
     transform: translate(-2px, -2px);
-    box-shadow: 4px 4px 0px 0px vars.$color-lime !important;
+    box-shadow: vars.$shadow-neo-lime-sm !important;
     border-color: vars.$color-black !important;
     outline: 0 !important;
   }

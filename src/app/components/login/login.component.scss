@@ -2,9 +2,6 @@
 
 .login {
   height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 100px;
 
   &__title {
@@ -15,18 +12,18 @@
 
   &__subtitle {
     font-size: 17px;
-    color: lighten(vars.$color-black, 20%);
     font-weight: 500;
     margin-left: 8px;
+    color: lighten(vars.$color-black, 20%);
   }
 
   &__card {
-    width: 380px;
-    background: vars.$color-white;
-    padding: 41px;
-    border: vars.$border-neo-thick;
     position: relative;
+    width: 380px;
+    padding: 41px;
     margin-top: 30px;
+    background: vars.$color-white;
+    border: vars.$border-neo-thick;
 
     &::after {
       content: '';
@@ -42,23 +39,23 @@
 
     .login__title {
       font-size: 37px;
-      text-align: center;
       margin-bottom: 32px;
+      text-align: center;
     }
   }
 
   &__field {
     label {
       font-weight: 700;
-      color: vars.$color-black;
       margin-bottom: 8px;
+      color: vars.$color-black;
     }
 
     .form-control {
+      padding: 12px;
       background-color: vars.$color-gray-light;
       border: vars.$border-neo-thin !important;
       border-radius: 0;
-      padding: 0.75rem;
 
       &:focus {
         background-color: vars.$color-white;
@@ -69,6 +66,7 @@
     }
 
     .form-text {
+      color: vars.$color-danger;
       font-weight: 600;
       font-size: 14px;
       margin-top: 8px;

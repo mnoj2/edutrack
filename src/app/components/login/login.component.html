@@ -1,5 +1,4 @@
-<div class="login">
-
+<div class="login d-flex justify-content-center align-items-center">
     <main class="login__hero">
         <div class="login__title">Welcome to EduTrack</div>
         <div class="login__subtitle">Manage students, Simplify administration.</div>
@@ -7,42 +6,31 @@
 
     <aside class="login__card">
         <h2 class="login__title">Login</h2>
+
         <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
             <div class="login__field mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" 
-                    class="form-control" 
-                    id="username" 
-                    formControlName="username" 
-                    aria-describedby="usernameHelp">
-                <div id="usernameHelp" *ngIf="usernameError" class="text-danger form-text">
+                <input type="text" class="form-control" id="username" formControlName="username">
+                <div *ngIf="usernameError" id="usernameHelp" class="form-text">
                     <i class='bx bxs-error-circle'></i> <span>{{ usernameError }}</span>
                 </div>
             </div>
+
             <div class="login__field mb-3">
                 <label for="password" class="form-label">Password</label>
-                
                 <div class="password-wrapper">
-                    <input 
-                        [type]="showPassword ? 'text' : 'password'" 
-                        class="form-control" 
-                        id="password" 
-                        formControlName="password">
-                    <button 
-                        type="button" 
-                        class="eye-btn" 
-                        (click)="togglePassword()"
-                        tabindex="-1">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" formControlName="password">
+                    <button type="button" class="eye-btn" (click)="togglePassword()" tabindex="-1">
                         <i class='bx' [ngClass]="showPassword ? 'bx-hide' : 'bx-show'"></i>
                     </button>
                 </div>
-
-                <div id="passwordHelp" *ngIf="passwordError" class="text-danger form-text">
+                <div *ngIf="passwordError" id="passwordHelp" class="form-text">
                     <i class='bx bxs-error-circle'></i> <span>{{ passwordError }}</span>
                 </div>
             </div>
+
             <button type="submit" class="login__btn">LOGIN</button>
         </form>
     </aside>
-
 </div>

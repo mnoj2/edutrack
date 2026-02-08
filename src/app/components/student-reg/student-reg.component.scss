@@ -80,6 +80,56 @@
     }
   }
 
+  &__radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px 0;
+  }
+
+  &__radio-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input[type="radio"] {
+      width: 24px;
+      height: 24px;
+      border: vars.$border-neo-thick;
+      appearance: none;
+      cursor: pointer;
+      background: vars.$color-white;
+      position: relative;
+      border-radius: 0;
+
+      &:checked {
+        background-color: vars.$color-lime;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background-color: vars.$color-black;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: vars.$shadow-neo-lime-sm;
+      }
+    }
+
+    label {
+      margin-bottom: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+  }
+
   &__footer {
     display: flex;
     justify-content: space-between;
