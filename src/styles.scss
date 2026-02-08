@@ -15,7 +15,6 @@ body {
   user-select: none;
 }
 
-
 .form-control {
   color: vars.$color-black;
   background-color: vars.$color-gray-light;
@@ -28,6 +27,5 @@ body {
     transform: translate(-2px, -2px);
     box-shadow: vars.$shadow-neo-lime-sm !important;
     border-color: vars.$color-black !important;
-    outline: 0 !important;
   }
 }

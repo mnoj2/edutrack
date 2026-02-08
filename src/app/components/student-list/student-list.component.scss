@@ -81,7 +81,7 @@
 
 ::ng-deep .btn-view {
     color: vars.$color-black;
-    background-color: #9ACD32;
+    background-color: vars.$color-lime;
 }
 
 ::ng-deep .btn-delete {
@@ -224,5 +224,5 @@
 }
 
 .ag-theme-alpine {
-  --ag-row-hover-color: #9ACD3A; 
+  --ag-row-hover-color: vars.$color-lime;
 }

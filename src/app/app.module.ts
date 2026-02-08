@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StudentRegComponent } from './components/student-reg/student-reg.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
-import { provideHotToastConfig } from '@ngneat/hot-toast';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
-import { AgGridModule } from 'ag-grid-angular';
+import { provideHotToastConfig } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { AgGridModule } from 'ag-grid-angular';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AgGridModule
