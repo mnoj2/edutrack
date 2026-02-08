@@ -66,7 +66,7 @@
     transition: vars.$transition-bounce;
     font-size: 18px;
     position: relative;
-    box-shadow: vars.$shadow-neo-tiny;
+
 
     &:hover {
         transform: translate(-2px, -2px);
@@ -81,18 +81,16 @@
 
 ::ng-deep .btn-view {
     color: vars.$color-black;
-
-    &:hover {
-        background-color: #9ACD32;
-    }
+    background-color: #9ACD32;
 }
 
 ::ng-deep .btn-delete {
-    color: vars.$color-black;
-
+    background-color: vars.$color-black;
+    color: vars.$color-lime;
+    
     &:hover {
-        background-color: vars.$color-black;
-        color: vars.$color-lime;
+        transform: translate(-2px, -2px);
+        box-shadow: vars.$shadow-neo-lime-sm;
     }
 }
 
@@ -142,10 +140,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: vars.$transition-default;
 
     &:hover {
         transform: translate(-2px, -2px);
-        box-shadow: vars.$shadow-neo-tiny;
+        box-shadow: vars.$shadow-neo-sm;
     }
 
     &:active {
@@ -222,4 +221,8 @@
 
 .delete-modal {
     box-shadow: vars.$shadow-neo-lg;
+}
+
+.ag-theme-alpine {
+  --ag-row-hover-color: #9ACD3A; 
 }

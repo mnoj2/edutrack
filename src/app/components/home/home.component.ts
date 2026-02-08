@@ -60,6 +60,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   initDonutChart(students: any[]) {
     if (!this.donutChartContainer) return;
 
+    const briefs: { [key: string]: string } = {
+      'CSE': 'Computer Science and Engineering',
+      'BT': 'BioTechnology',
+      'MECH': 'Mechanical Engineering',
+      'ECE': 'Electronics and Communication Engineering',
+      'IT': 'Information Technology',
+      'EEE': 'Electrical and Electronics Engineering',
+      'CIVIL': 'Civil Engineering',
+      'ADS': 'Artificial Intelligence and Data Science',
+    };
+
     const courseCounts = students.reduce((acc: { [key: string]: number }, student) => {
       const course = student.course || 'Unknown';
       acc[course] = (acc[course] || 0) + 1;
@@ -68,7 +79,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     const seriesData = Object.keys(courseCounts).map(courseName => ({
       name: courseName,
-      y: courseCounts[courseName]
+      y: courseCounts[courseName],
+      brief: briefs[courseName] 
     }));
 
 
@@ -81,6 +93,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         text: 'STUDENT DISTRIBUTION',
         margin: 50,
         style: { fontWeight: '900', color: '#0f120d', fontSize: '18px' }
+      },
+      tooltip: {
+        headerFormat: '', 
+        pointFormat: '<b>{point.brief}</b><br>Total: {point.y} Students' 
       },
       credits: { enabled: false },
       plotOptions: {
