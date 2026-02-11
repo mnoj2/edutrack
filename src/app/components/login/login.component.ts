@@ -50,9 +50,10 @@ export class LoginComponent {
 
     this.authService.changeUser(username);
 
-    this.loginSubscription = this.authService.login(username!, password!).subscribe({
+    this.loginSubscription = this.authService.login({ username, password }).subscribe({
       next: (success) => {
         if(success) {
+          localStorage.setItem('isLogged', 'true');
           this.toast.success('Login Successful!');
           setTimeout(() => {
             this.router.navigate(['/home']);

@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of, switchMap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,12 @@ import { Observable, map, of, switchMap, throwError } from 'rxjs';
 export class StudentService {
 
   private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl;
+
   private jsonUrl = 'assets/data/students.json';
 
   getStudentsCount(): Observable<number> {
-    return this.getStudentsData().pipe(map(students => students.length));
+    return this.http.get<number>(`${this.apiUrl}/student/count`);
   }
 
   addStudent(student: any): Observable<any> {

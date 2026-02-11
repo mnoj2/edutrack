@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, tap, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class AuthService {
 
   private http = inject(HttpClient);
-  private jsonUrl = 'assets/data/users.json';
+  private apiUrl = environment.apiUrl;
   
   private userSource = new BehaviorSubject<string>('Admin');
   currentUser = this.userSource.asObservable();
@@ -17,17 +18,8 @@ export class AuthService {
 
   public isLogged: boolean = localStorage.getItem('isLogged') === 'true';
 
-  login(username: string, password: string): Observable<boolean> {
-    return this.http.get<any[]>(this.jsonUrl).pipe(
-      map(users => {
-        const user = users.find(user_ => user_.username === username && user_.password === password);
-        if(user) {
-          localStorage.setItem('isLogged', 'true');
-          return true;
-        }
-        return false;
-      })
-    )
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/login`, data);
   }
 
   isLoggedIn(): boolean { 
