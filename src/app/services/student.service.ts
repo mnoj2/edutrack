@@ -18,50 +18,11 @@ export class StudentService {
   }
 
   addStudent(student: any): Observable<any> {
-    const emailToAdd = student.email.trim().toLowerCase();
-
-    return this.getStudentsData().pipe(
-      switchMap(students => {
-        const emailExists = students.some(s => s.email.trim().toLowerCase() === emailToAdd);
-        if (emailExists) {
-          return throwError(() => new Error('Email already exists'));
-        }
-
-        const storedData = localStorage.getItem('students');
-        const localStudents: any[] = storedData ? JSON.parse(storedData) : [];
-
-        // Final safe check against latest local storage state
-        if (localStudents.some(s => s.email.trim().toLowerCase() === emailToAdd)) {
-          return throwError(() => new Error('Email already exists'));
-        }
-
-        const deletedData = localStorage.getItem('deleted_emails');
-        let deletedEmails: string[] = deletedData ? JSON.parse(deletedData) : [];
-        deletedEmails = deletedEmails.filter(email => email.trim().toLowerCase() !== emailToAdd);
-        localStorage.setItem('deleted_emails', JSON.stringify(deletedEmails));
-
-        localStudents.push({ ...student, email: student.email.trim() });
-        localStorage.setItem('students', JSON.stringify(localStudents));
-
-        return of(student);
-      })
-    );
+        return this.http.post<any>(`${this.apiUrl}/student/student`, student);
   }
 
   getStudentsData(): Observable<any[]> {
-    return this.http.get<any[]>(this.jsonUrl).pipe(
-      map(jsonStudents => {
-        const storedData = localStorage.getItem('students');
-        const localStudents = storedData ? JSON.parse(storedData) : [];
-
-        const deletedData = localStorage.getItem('deleted_emails');
-        const deletedEmails: string[] = deletedData ? JSON.parse(deletedData) : [];
-
-        const allStudents = [...jsonStudents, ...localStudents];
-
-        return allStudents.filter(student => !deletedEmails.includes(student.email));
-      })
-    );
+    return this.http.get<any[]>(`${this.apiUrl}/student/students`);
   }
 
   deleteStudent(email: string): Observable<any> {

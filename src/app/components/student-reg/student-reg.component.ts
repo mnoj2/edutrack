@@ -28,7 +28,10 @@ export class StudentRegComponent implements OnDestroy {
   onSubmit() {
     if (this.studentForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      this.studentService.addStudent(this.studentForm.value)
+      const formValue = {
+        ...this.studentForm.value, mobileNumber: this.studentForm.value.mobileNumber?.toString() || ''
+      };
+      this.studentService.addStudent(formValue)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
@@ -38,7 +41,7 @@ export class StudentRegComponent implements OnDestroy {
           },
           error: (err) => {
             this.isSubmitting = false;
-            if (err.message === 'Email already exists') {
+            if (err.status === 401) {
               this.toast.error('Email already exists!');
             } else {
               this.toast.error('Registration Failed');
