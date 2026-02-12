@@ -86,10 +86,17 @@ export class StudentListComponent implements OnInit, OnDestroy {
     if (this.studentToDeleteEmail) {
       this.studentService.deleteStudent(this.studentToDeleteEmail)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(() => {
-          this.toast.success('Student deleted successfully');
-          this.loadStudents();
-          this.closeDeleteModal();
+        .subscribe({
+          next: () => {
+            this.toast.success('Student deleted successfully');
+            this.loadStudents();
+            this.closeDeleteModal(); // Closes on success
+          },
+          error: (err) => {
+            this.toast.error('Delete failed');
+            // Decide if you want to close it even if it fails:
+            // this.closeDeleteModal(); 
+          }
         });
     }
   }

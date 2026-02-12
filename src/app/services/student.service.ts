@@ -18,28 +18,15 @@ export class StudentService {
   }
 
   addStudent(student: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/student/student`, student);
+        return this.http.post<any>(`${this.apiUrl}/student`, student);
   }
 
   getStudentsData(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/student/students`);
+    return this.http.get<any[]>(`${this.apiUrl}/student`);
   }
 
   deleteStudent(email: string): Observable<any> {
-    const deletedData = localStorage.getItem('deleted_emails');
-    const deletedEmails: string[] = deletedData ? JSON.parse(deletedData) : [];
-
-    if (!deletedEmails.includes(email)) {
-      deletedEmails.push(email);
-      localStorage.setItem('deleted_emails', JSON.stringify(deletedEmails));
-    }
-
-    const storedData = localStorage.getItem('students');
-    let students = storedData ? JSON.parse(storedData) : [];
-    students = students.filter((s: any) => s.email !== email);
-    localStorage.setItem('students', JSON.stringify(students));
-
-    return of({ success: true });
+    return this.http.delete<any>(`${this.apiUrl}/student/${email}`);
   }
 
 }
