@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     };
 
     const courseCounts = students.reduce((acc: { [key: string]: number }, student) => {
-      const course = student.course || 'Unknown';
+      const course = student.course;
       acc[course] = (acc[course] || 0) + 1;
       return acc;
     }, {});
@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       y: courseCounts[courseName],
       brief: briefs[courseName] 
     }));
-
 
     const chartOptions: Highcharts.Options = {
       chart: {

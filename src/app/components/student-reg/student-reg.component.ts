@@ -41,10 +41,12 @@ export class StudentRegComponent implements OnDestroy {
           },
           error: (err) => {
             this.isSubmitting = false;
-            if (err.status === 401) {
+            if (err.status === 409) {
               this.toast.error('Email already exists!');
+            } else if (err.status === 500) {
+              this.toast.error('Server down. Please try later'); 
             } else {
-              this.toast.error('Registration Failed');
+              this.toast.error('Something went wrong'); 
             }
           }
         });

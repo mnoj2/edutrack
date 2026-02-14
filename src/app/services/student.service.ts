@@ -11,18 +11,16 @@ export class StudentService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
-  private jsonUrl = 'assets/data/students.json';
-
-  getStudentsCount(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/student/count`);
-  }
-
   addStudent(student: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/student`, student);
   }
 
   getStudentsData(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/student`);
+  }
+
+  getStudentsCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/student/count`);
   }
 
   deleteStudent(email: string): Observable<any> {

@@ -21,7 +21,10 @@ export class AuthService {
   login(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, data);
   }
-
+  setLoggedIn(value: boolean) {
+    this.isLogged = value;
+  }
+  
   isLoggedIn(): boolean { 
     return this.isLogged;
   }  

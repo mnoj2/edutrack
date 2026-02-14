@@ -1,5 +1,5 @@
-import { Component, inject, OnDestroy, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -27,6 +27,7 @@ export class LoginComponent {
   });
 
   onSubmit() {
+
     this.usernameError = '';
     this.passwordError = '';
 
@@ -52,19 +53,23 @@ export class LoginComponent {
 
     this.loginSubscription = this.authService.login({ username, password }).subscribe({
       next: (success) => {
-        if(success) {
-          localStorage.setItem('isLogged', 'true');
-          this.toast.success('Login Successful!');
-          setTimeout(() => {
-            this.router.navigate(['/home']);
-          }, 1000);
-        }
-        else {
-          this.toast.error('Invalid username or password');
-        }
+        localStorage.setItem('isLogged', 'true');
+        this.authService.setLoggedIn(true);
+
+        this.toast.success('Login Successful!');
+        
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000);
       },
-      error: () => {
-        this.toast.error('Error loading user data');
+      error: (err) => {
+        if (err.status === 401) {
+          this.toast.error('Invalid username or password'); 
+        } else if (err.status === 500) {
+          this.toast.error('Server down. Please try later'); 
+        } else {
+          this.toast.error('Something went wrong'); 
+        }
       }
     });
   }
