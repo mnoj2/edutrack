@@ -10,27 +10,57 @@ export class AuthService {
 
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
-  
   private userSource = new BehaviorSubject<string>('Admin');
   currentUser = this.userSource.asObservable();
-
   private _isFirstLogin = true;
 
-  public isLogged: boolean = localStorage.getItem('isLogged') === 'true';
+  private readonly ACCESS_TOKEN = 'access_token';
+  private readonly REFRESH_TOKEN = 'refresh_token';
+  private readonly USER_ID = 'user_id';
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login`, data);
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, data).pipe(
+      tap(response => {
+        if (response && response.accessToken) {
+          this.saveTokens(response.accessToken, response.refreshToken, response.userId);
+          this.changeUser(data.username);
+        }
+      })
+    );
   }
-  setLoggedIn(value: boolean) {
-    this.isLogged = value;
+
+  private saveTokens(accessToken: string, refreshToken: string, userId: string) {
+    localStorage.setItem(this.ACCESS_TOKEN, accessToken);
+    localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
+    localStorage.setItem(this.USER_ID, userId);
+  }
+
+  refreshToken(): Observable<any> {
+    const refreshToken = localStorage.getItem(this.REFRESH_TOKEN);
+    const userId = localStorage.getItem(this.USER_ID);
+    
+    return this.http.post<any>(`${this.apiUrl}/auth/refresh`, { userId, refreshToken }).pipe(
+      tap(response => {
+        if (response && response.accessToken) {
+          this.saveTokens(response.accessToken, response.refreshToken, response.userId);
+        }
+      })
+    );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.ACCESS_TOKEN);
   }
   
   isLoggedIn(): boolean { 
-    return this.isLogged;
+    return !!this.getToken();
   }  
 
   logout(): void {
-    localStorage.removeItem('isLogged');
+    localStorage.removeItem(this.ACCESS_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+    localStorage.removeItem(this.USER_ID);
+    localStorage.removeItem('username');
   }
 
   changeUser(name: string) {

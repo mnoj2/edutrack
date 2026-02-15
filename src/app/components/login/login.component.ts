@@ -52,12 +52,8 @@ export class LoginComponent {
     this.authService.changeUser(username);
 
     this.loginSubscription = this.authService.login({ username, password }).subscribe({
-      next: (success) => {
-        localStorage.setItem('isLogged', 'true');
-        this.authService.setLoggedIn(true);
-
+      next: () => {
         this.toast.success('Login Successful!');
-        
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 1000);
@@ -65,13 +61,12 @@ export class LoginComponent {
       error: (err) => {
         if (err.status === 401) {
           this.toast.error('Invalid username or password'); 
-        } else if (err.status === 500) {
-          this.toast.error('Server down. Please try later'); 
         } else {
-          this.toast.error('Something went wrong'); 
+          this.toast.error('Login failed. Please try again'); 
         }
       }
     });
+
   }
 
   togglePassword() {

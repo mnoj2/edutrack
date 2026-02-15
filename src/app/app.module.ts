@@ -14,6 +14,9 @@ import { StudentListComponent } from './components/student-list/student-list.com
 
 import { provideHotToastConfig } from '@ngneat/hot-toast';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,8 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
           fontWeight: 'bold',
         },
       },
-      })
+      }),
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
    ],
   bootstrap: [AppComponent]
 })
