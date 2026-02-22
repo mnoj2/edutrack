@@ -10,8 +10,13 @@
                     <div class="register__field">
                         <label>Full Name</label>
                         <input type="text" class="form-control" formControlName="fullName">
-                        <div class="form-text text-danger" *ngIf="studentForm.get('fullName')?.invalid && studentForm.get('fullName')?.touched">
-                            <i class='bx bxs-error-circle'></i> Full name is required
+                        <div class="form-text text-danger">
+                            <span *ngIf="studentForm.get('fullName')?.hasError('required')">
+                                <i class='bx bxs-error-circle'></i>  Full name is required
+                            </span>
+                            <span *ngIf="studentForm.get('fullName')?.hasError('pattern') && !studentForm.get('fullName')?.hasError('required')">
+                                <i class='bx bxs-error-circle'></i>  Only alphabets are allowed
+                            </span>
                         </div>
                     </div>
 

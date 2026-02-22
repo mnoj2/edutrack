@@ -15,7 +15,7 @@ export class StudentRegComponent implements OnDestroy {
   isSubmitting = false;
   todayDate: string = new Date().toISOString().split('T')[0];
   studentForm = new FormGroup({
-    fullName: new FormControl('', Validators.required),
+    fullName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')] ),
     email: new FormControl('', [Validators.required, Validators.email]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
     gender: new FormControl('', Validators.required),

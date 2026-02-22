@@ -64,20 +64,6 @@
         outline: none;
       }
     }
-
-    .form-text {
-      font-weight: 600;
-      font-size: 14px;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: vars.$color-black;
-
-      &.text-danger {
-        color: vars.$color-danger;
-      }
-    }
   }
 
   &__radio-group {
@@ -205,6 +191,25 @@
       cursor: not-allowed;
       opacity: 0.7;
     }
+  }
+}
+
+.form-text {
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: vars.$color-black;
+
+  &.text-danger {
+    color: vars.$color-danger;
+  }
+
+  i {
+    font-size: 18px;
+    vertical-align: middle;
   }
 }
 
