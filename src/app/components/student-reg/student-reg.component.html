@@ -25,7 +25,7 @@
 
                     <div class="register__field">
                         <label>Mobile Number</label>
-                        <input type="number" class="form-control" formControlName="mobileNumber" [maxlength]="10">
+                        <input type="number" class="form-control" formControlName="mobileNumber" [max]="10">
                         <div class="form-text text-danger" *ngIf="studentForm.get('mobileNumber')?.invalid && studentForm.get('mobileNumber')?.touched">
                             <i class='bx bxs-error-circle'></i> 10-digit number required
                         </div>
@@ -33,7 +33,7 @@
 
                     <div class="register__field">
                         <label>Date of Birth</label>
-                        <input type="date" class="form-control" formControlName="dateOfBirth">
+                        <input type="date" class="form-control" formControlName="dateOfBirth" [max]="todayDate">
                         <div class="form-text text-danger" *ngIf="studentForm.get('dateOfBirth')?.invalid && studentForm.get('dateOfBirth')?.touched">
                             <i class='bx bxs-error-circle'></i> Date of birth is required
                         </div>

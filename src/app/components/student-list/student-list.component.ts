@@ -10,17 +10,23 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit, OnDestroy {
-  private studentService = inject(StudentService);
-  private toast = inject(HotToastService);
-  private zone = inject(NgZone);
-  private destroy$ = new Subject<void>();
 
+  private destroy$ = new Subject<void>();
   rowData: any[] = [];
   selectedStudent: any = null;
   isModalOpen = false;
-
   isDeleteModalOpen = false;
   studentToDeleteEmail: string = '';
+
+  constructor(
+    private studentService: StudentService,
+    private toast: HotToastService,
+    private zone: NgZone
+  ) {}
+
+  ngOnInit(): void {
+    this.loadStudents();
+  }
 
   columnDefs: ColDef[] = [
     { field: 'fullName', headerName: 'Name', filter: true, flex: 2 },
@@ -56,10 +62,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
     sortable: true,
     resizable: true
   };
-
-  ngOnInit(): void {
-    this.loadStudents();
-  }
 
   loadStudents() {
     this.studentService.getStudentsData()

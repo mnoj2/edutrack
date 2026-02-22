@@ -11,18 +11,19 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
 
+  private destroy$ = new Subject<void>();
   username: string = '';
   totalStudents: number = 0;
+  donutChart: any;
 
   @ViewChild('donutChartContainer') donutChartContainer!: ElementRef;
 
-  private authService = inject(AuthService);
-  private toast = inject(HotToastService);
-  private studentService = inject(StudentService);
-
-  donutChart: any;
+  constructor(
+    private authService: AuthService,
+    private toast: HotToastService,
+    private studentService: StudentService,
+  ) {}
 
   ngOnInit() {
     this.authService.currentUser

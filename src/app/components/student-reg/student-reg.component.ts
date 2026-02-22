@@ -10,11 +10,10 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./student-reg.component.scss']
 })
 export class StudentRegComponent implements OnDestroy {
-  private destroy$ = new Subject<void>();
-  private studentService = inject(StudentService);
-  private toast = inject(HotToastService);
-  isSubmitting = false;
 
+  private destroy$ = new Subject<void>();
+  isSubmitting = false;
+  todayDate: string = new Date().toISOString().split('T')[0];
   studentForm = new FormGroup({
     fullName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,6 +23,11 @@ export class StudentRegComponent implements OnDestroy {
     course: new FormControl('', Validators.required),
     termsAccepted: new FormControl(false, Validators.requiredTrue)
   });
+
+  constructor(
+    private studentService: StudentService,
+    private toast: HotToastService
+  ) {}
 
   onSubmit() {
     if (this.studentForm.valid && !this.isSubmitting) {

@@ -7,8 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private http = inject(HttpClient);
+  
   private apiUrl = environment.apiUrl;
   private userSource = new BehaviorSubject<string>('Admin');
   currentUser = this.userSource.asObservable();
@@ -17,6 +16,8 @@ export class AuthService {
   private readonly ACCESS_TOKEN = 'access_token';
   private readonly REFRESH_TOKEN = 'refresh_token';
   private readonly USER_ID = 'user_id';
+
+  constructor(private http: HttpClient) {}
 
   login(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/login`, data).pipe(

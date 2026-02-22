@@ -8,8 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class StudentService {
 
-  private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient) { }
 
   addStudent(student: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/student`, student);

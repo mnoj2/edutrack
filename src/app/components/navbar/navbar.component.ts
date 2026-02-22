@@ -9,9 +9,12 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private toast = inject(HotToastService);
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toast: HotToastService
+  ) {}
 
   onLogout() {
     this.authService.logout(); 

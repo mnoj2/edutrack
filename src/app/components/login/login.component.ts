@@ -12,19 +12,20 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
 
-  private authService = inject(AuthService);  
-  private toast = inject(HotToastService);
-  private router = inject(Router);
   private loginSubscription?: Subscription;
-
   usernameError: string = '';
   passwordError: string = '';
   showPassword = false;
-
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
   });
+
+  constructor(
+    private authService: AuthService,
+    private toast: HotToastService,
+    private router: Router
+  ) {}
 
   onSubmit() {
 
